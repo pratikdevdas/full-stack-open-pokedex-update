@@ -39,8 +39,12 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
         - uses: actions/checkout@v4
-        - name: Bump version and push tag
+        - name: TEST GITHUB CONEXT
+          env:
+            COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message.join) }}
+          run: echo "$COMMIT_MESSAGES"
           if: ${{ github.event_name == 'push' }}
+        - name: Bump version and push tag
           uses: anothrNick/github-tag-action@1.69.0
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
