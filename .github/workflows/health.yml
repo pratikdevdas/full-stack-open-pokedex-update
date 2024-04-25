@@ -1,11 +1,10 @@
+name: Cron health
 
 on:
    
   push:
     branches:
       - main
-  
-      # note that your "main" branch might be called main instead of master
 
 jobs:
   hello_world_job:
