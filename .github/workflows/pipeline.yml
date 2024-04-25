@@ -25,6 +25,7 @@ jobs:
         - name: test
           run: npm run test
         - name: e2e tests
+          id: test
           uses: cypress-io/github-action@v5
           with:
             command: npm run test:e2e
@@ -35,10 +36,10 @@ jobs:
           run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
         - name: Test Failure
           uses: rjstone/discord-webhook-notify@v1
-          if: failure()
+          if: ${{ failure() && steps.test.conclusion == 'failure' }}
           with:
             severity: error
-            details: Test Failed! 
+            details: e2e testing has failed 
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
     
     tag_release:
