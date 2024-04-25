@@ -1,10 +1,8 @@
 name: Cron health
-
-on:
    
-  push:
-    branches:
-      - main
+on:
+  schedule:
+    - cron: "15 4,5 * * *"
 
 jobs:
   hello_world_job:
@@ -13,4 +11,4 @@ jobs:
     - name: Check the deployed service URL
       uses: jtalk/url-health-check-action@v4
       with:
-        url: https://full-stack-open-poked]ex-update.onrender.com/health
+        url: https://full-stack-open-pokedex-update.onrender.com/health
